@@ -1,1 +1,3 @@
-print("testing")
+import Inventory_management_system
+
+Inventory_management_system.my_stock()
