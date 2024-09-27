@@ -2,6 +2,8 @@ import sys
 sys.path.append(r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\Inventory_management_system")  #because line no 4 to 8 module importing
 
 import adding_product_in_stock
+import check_stock_report
+import update_prduct_in_stock
 
 
 def my_stock():
@@ -24,8 +26,9 @@ def my_stock():
             if choice==1:
                 adding_product_in_stock.add_product_in_stock()
             elif choice==2:
-                pass
+                update_prduct_in_stock.update_product()
             elif choice==3:
+                check_stock_report.all_product_information()
                 pass
             elif choice==4:
                 pass
