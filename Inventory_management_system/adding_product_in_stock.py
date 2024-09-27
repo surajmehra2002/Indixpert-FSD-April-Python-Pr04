@@ -1,36 +1,40 @@
-def add_product_in_stock():
-    class Inventory:
-        def __init__(self):
-            # Initialize an empty dictionary to store products
-            self.stock = {}
+import json, os
 
-        def add_product(self, name, price, quantity):
-            # Add the product to the inventory
-            if name in self.stock:
-                # If the product already exists, update the quantity
-                self.stock[name]['quantity'] += quantity
-            else:
-                # Add new product to the stock
-                self.stock[name] = {'price': price, 'quantity': quantity}
+# Path to the JSON file
+JSON_data = r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\stock.json"
 
-        def show_inventory(self):
-            # Display the inventory
-            if not self.stock:
-                print("Inventory is empty.")
-            else:
-                for product, details in self.stock.items():
-                    print(f"Product: {product}, Price: {details['price']}, Quantity: {details['quantity']}")
+class Inventory:
 
-    # Create an instance of Inventory
-    stock = Inventory()
+    def add_product(self, id, name, price, quantity):
+        dict_format_item = {
+            "name": name,
+            "price": price,
+            "quantity": quantity
+        }
+        new_product = {id: dict_format_item}
 
-    # Add some products
-    # stock.add_product("milk", 1000, 50)
-    # stock.add_product("bread", 50, 30)
-    stock.add_product(input("Enter product name: "), int(input("Enter totle price: ")), int(input("Enter quantity no: ")))
+        if os.path.exists(JSON_data):
+            with open(JSON_data, "r") as file:
+                try:
+                    list_data = json.load(file)
+                except json.JSONDecodeError:
+                    list_data = []
+        else:
+            list_data = []
 
-    # Display the inventory
-    stock.show_inventory()
+        list_data.append(new_product)
 
-       
-    print("Product added successfully in your stock")
+        with open(JSON_data, "w") as file:
+            file.write(json.dumps(list_data, indent=2) )
+            # json.dump(list_data, file) 
+
+        print("Product added successfully in your stock.")
+
+stock = Inventory()
+
+stock.add_product(
+    int(input("Product ID: ")), 
+    input("Enter product name: "), 
+    int(input("Enter total price: ")), 
+    int(input("Enter quantity no: "))
+)
