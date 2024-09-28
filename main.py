@@ -1,3 +1,6 @@
-import Inventory_management_system
+# This is main file where all module or package will accessed ,after running only this file you can see overall output...
+# note some points
+# 1- for running this file properly you have to changing some file path accordingly your pc , file path inside "manage_shop.py" which are inside package
 
-Inventory_management_system.my_stock()
+import Inventory_management_system
+Inventory_management_system.my_stock()              
