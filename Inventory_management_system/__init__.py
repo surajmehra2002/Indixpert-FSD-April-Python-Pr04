@@ -1,1 +1,0 @@
-from .manage_shop import my_stock
