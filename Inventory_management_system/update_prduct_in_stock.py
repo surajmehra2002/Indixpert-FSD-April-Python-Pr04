@@ -63,30 +63,29 @@ def update_product(JSON_data, exiting_program):
                                 qty_to_sell = int(input("Enter the quantity to sell: "))
                                 if qty_to_sell > product["product"]["quantity"]:
                                     print("Error: Selling quantity exceeds available stock.")
-                                    exiting_program()
-                                price_to_deduct = int(input("Enter the price for sold items: "))
-                                if price_to_deduct > product["product"]["price"]:
-                                    print("Error: Selling price exceeds the current product price.")
-                                    exiting_program()
                                 else:
-                                    remaining_qty = product["product"]["quantity"] - qty_to_sell
-                                    product["product"]["quantity"] = remaining_qty
-                                    product["product"]["price"] -= price_to_deduct
-                                    product["product"]["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                                    
-                                    print(f"{qty_to_sell} units sold from product ID {product_id}. New quantity: {product['product']['quantity']}, Price deducted by {price_to_deduct}. New price: {product['product']['price']}")
-
-                                    # Check if all products are sold
-                                    if remaining_qty == 0:
-                                        print("Your products are out of stock, please restore as fast as possible.")
-                                        restore_choice = input("Will you restore? (yes/no): ").lower()
-                                        if restore_choice == 'yes':
-                                            print("Your product will be kept.")
-                                            exiting_program()
-                                        else:
-                                            data.remove(product) 
-                                            print(f"Product ID {product_id} has been removed from the inventory.")
-                                            exiting_program()
+                                    price_to_deduct = int(input("Enter the price for sold items: "))
+                                    if price_to_deduct > product["product"]["price"]:
+                                        print("Error: Selling price exceeds the current product price.")
+                                    else:
+                                        remaining_qty = product["product"]["quantity"] - qty_to_sell
+                                        product["product"]["quantity"] = remaining_qty
+                                        product["product"]["price"] -= price_to_deduct
+                                        product["product"]["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                                        
+                                        print(f"{qty_to_sell} units sold from product ID {product_id}. New quantity: {product['product']['quantity']}, Price deducted by {price_to_deduct}. New price: {product['product']['price']}")
+                                        exiting_program()
+                                        # Check if all products are sold
+                                        if remaining_qty == 0:
+                                            print("Your products are out of stock, please restore as fast as possible.")
+                                            restore_choice = input("Will you restore? (yes/no): ").lower()
+                                            if restore_choice == 'yes':
+                                                print("Your product will be kept.")
+                                                exiting_program()
+                                            else:
+                                                data.remove(product) 
+                                                print(f"Product ID {product_id} has been removed from the inventory.")
+                                                exiting_program()
                             except ValueError:
                                 print("Invalid input. Quantity and price should be numbers.")
                         else:
