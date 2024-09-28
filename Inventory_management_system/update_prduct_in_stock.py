@@ -30,4 +30,3 @@ def update_product():
 
 
 
-update_product()
