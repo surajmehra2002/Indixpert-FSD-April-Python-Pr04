@@ -67,7 +67,3 @@ def update_product(JSON_data):
     with open(JSON_data, "w") as file:
         json.dump(data, file, indent=2)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0f546f163b225aade17422ade2063a056de7e928

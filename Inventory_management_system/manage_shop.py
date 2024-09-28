@@ -3,8 +3,8 @@
 
 
 import sys
-sys.path.append(r"S:\indixpert_coaching\python_project\Indixpert-FSD-April-Python-Pr04\Inventory_management_system")  #because line no 4 to 8 module importing
-JSON_data = r"S:\indixpert_coaching\python_project\Indixpert-FSD-April-Python-Pr04\stock.json"
+sys.path.append(r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\Inventory_management_system")  #because line no 4 to 8 module importing
+JSON_data = r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\stock.json"
 
 import adding_product_in_stock
 import check_stock_report
