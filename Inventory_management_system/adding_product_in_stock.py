@@ -1,11 +1,11 @@
+# This file will not run from this location because it is a module and all files are managed from manage_shop.py
 
-# This file not will run from this location because it is module and all files manage from manage_shop.py
-
-import json, os
+import json
+import os, time
 from datetime import datetime
 
 
-def add_product_in_stock(JSON_data):
+def add_product_in_stock(JSON_data, exiting_program):
     class Inventory:
 
         def add_product(self, id, name, price, quantity):
@@ -41,11 +41,11 @@ def add_product_in_stock(JSON_data):
                 compact_json_data4 = compact_json_data3.replace('}}, ', '}}, \n') 
                 file.write(compact_json_data4)
             print("Product added successfully to your stock.")
+            exiting_program()
 
     stock = Inventory()
 
     while True:
-        product_id = int(input("Enter Product ID: "))
 
         if os.path.exists(JSON_data):
             with open(JSON_data, "r") as file:
@@ -54,15 +54,23 @@ def add_product_in_stock(JSON_data):
                 except json.JSONDecodeError:
                     list_data = []
         else:
+            print("You don't have database file, we are creating new json file (stock.json)")
+            print("Creating",end="")
+            for i in range (5):
+                time.sleep(.1)
+                print(".",end="")
+            print("\n")
+
             list_data = []
 
+        product_id = int(input("Enter Product ID: "))
         product_exists = any(product["product_id"] == product_id for product in list_data)
 
         if product_exists:
             print(f"Error: Product ID {product_id} already exists. Please enter a different product ID.")
         else:
             while True:
-                product_name = input("Enter Product Name: ")
+                product_name = input("Enter Product Name: ").strip()
                 product_name_exists = any(product["product"]["name"].lower() == product_name.lower() for product in list_data)
 
                 if product_name_exists:
@@ -75,5 +83,5 @@ def add_product_in_stock(JSON_data):
                 int(input("Enter total price: ")),
                 int(input("Enter quantity: "))
             )
-            break  # Exit the loop after successful addition
+            break 
 
