@@ -1,7 +1,10 @@
-import json
-JSON_data = r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\stock.json"
 
-def all_product_information():
+# This file not will run from this location because it is module and all files manage from manage_shop.py
+
+import json
+
+
+def all_product_information(JSON_data):
     with open (JSON_data, "r") as file:
         
         data = json.load(file)

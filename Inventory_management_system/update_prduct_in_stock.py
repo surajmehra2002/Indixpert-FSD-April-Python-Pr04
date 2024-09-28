@@ -1,33 +1,69 @@
 
+# This file not will run from this location because it is module and all files manage from manage_shop.py
+
+
 import json
-JSON_data = r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\stock.json"
+import os
+from datetime import datetime
 
 
+def update_product(JSON_data):
+    print("To exit, enter '0' as the product ID.")
+    product_id_input = input("Enter product id which you want to update: ")
 
-def update_product():
-    product_id = int(input("Enter product id which you want update: "))
+    if product_id_input == '0':
+        print("Exiting to dashboard.")
+        return  
 
-    with open(JSON_data , "r") as file:
+    try:
+        product_id = int(product_id_input)
+    except ValueError:
+        print("Invalid input. Please enter a valid product ID.")
+        return  
+
+    if not os.path.exists(JSON_data):
+        print("The stock file does not exist.")
+        return
+
+    with open(JSON_data, "r") as file:
         data = json.loads(file.read())
+        product_found = False 
         for product in data:
-            if product_id in product:
-                print(f"Current data for product {product_id}: {product[product_id]}")
+            if product["product_id"] == product_id: 
+                product_found = True
+                print(f"Current data for product {product_id}: {product['product']}")
                 
-                # Take new values for the product attributes
-                new_name = input("Enter new product name: ")
-                new_price = int(input("Enter new product price: "))
-                new_quantity = int(input("Enter new product quantity: "))
+                current_name = product["product"]["name"]
+
+                new_name = input("Enter new product name (or press enter to keep current): ")
+
+                if new_name and new_name.lower() != current_name.lower():
+                    existing_product = next((p for p in data if p["product"]["name"].lower() == new_name.lower() and p["product_id"] != product_id), None)
+                    if existing_product:
+                        print(f"Error: Product name '{new_name}' already exists for product ID {existing_product['product_id']}.")
+                        return 
+                if new_name:
+                    product["product"]["name"] = new_name
                 
-                # Update the product's attributes
-                product[product_id]['name'] = new_name
-                product[product_id]['price'] = new_price
-                product[product_id]['quantity'] = new_quantity
+                new_price = input("Enter new product price: ")
+                if new_price:
+                    product["product"]["price"] = int(new_price)
                 
-                print(f"Updated data for product {product_id}: {product[product_id]}")
+                new_quantity = int(input("Enter additional quantity to add: "))
+                
+                if new_name == current_name or not new_name:
+                    product["product"]["quantity"] += new_quantity  
+                else:
+                    product["product"]["quantity"] = new_quantity
+
+                product["product"]["added_on"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+                print(f"Updated data for product {product_id}: {product['product']}")
                 break
-        else:
+
+        if not product_found:
             print("Product not found.")
 
+    with open(JSON_data, "w") as file:
+        json.dump(data, file, indent=2)
 
-
-update_product()
