@@ -40,7 +40,11 @@ def add_product_in_stock(JSON_data, exiting_program):
                 compact_json_data3 = compact_json_data2.replace(',"product":', ',\n "product":')  
                 compact_json_data4 = compact_json_data3.replace('}}, ', '}}, \n') 
                 file.write(compact_json_data4)
-            print("Product added successfully to your stock.")
+            print("\nAdding",end="")
+            for i in range(5):
+                time.sleep(.2)
+                print(".",end="")
+            print("\nProduct added successfully to your stock.")
             exiting_program()
 
     stock = Inventory()
@@ -62,26 +66,26 @@ def add_product_in_stock(JSON_data, exiting_program):
             print("\n")
 
             list_data = []
+        len_list_data = len(list_data)
+        systm_genarate_id = len_list_data+1
+        product_id = "PD0"+ str(systm_genarate_id)
 
-        product_id = int(input("Enter Product ID: "))
-        product_exists = any(product["product_id"] == product_id for product in list_data)
 
-        if product_exists:
-            print(f"Error: Product ID {product_id} already exists. Please enter a different product ID.")
-        else:
-            while True:
-                product_name = input("Enter Product Name: ").strip()
-                product_name_exists = any(product["product"]["name"].lower() == product_name.lower() for product in list_data)
 
-                if product_name_exists:
-                    print(f"Error: Product name '{product_name}' already exists. Please enter a different product name.")
-                else:
-                    break 
-            stock.add_product(
-                product_id,
-                product_name,
-                int(input("Enter total price: ")),
-                int(input("Enter quantity: "))
-            )
-            break 
+        
+        while True:
+            product_name = input("Enter Product Name: ").strip()
+            product_name_exists = any(product["product"]["name"].lower() == product_name.lower() for product in list_data)
+
+            if product_name_exists:
+                print(f"Error: Product name '{product_name}' already exists. Please enter a different product name.")
+            else:
+                break 
+        stock.add_product(
+            product_id,
+            product_name,
+            int(input("Enter per item price: ")),
+            int(input("Enter quantity: "))
+        )
+        break 
 

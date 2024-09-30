@@ -3,13 +3,13 @@
 
 
 import time,sys
-sys.path.append(r"S:\indixpert_coaching\python_project\Indixpert-FSD-April-Python-Pr04\Inventory_management_system")  #because line no 4 to 8 module importing
-JSON_data = r"S:\indixpert_coaching\python_project\Indixpert-FSD-April-Python-Pr04\stock.json"
+sys.path.append(r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\Inventory_management_system")  #because line no 4 to 8 module importing
+JSON_data = r"stock.json"
 
 import adding_product_in_stock
 import check_stock_report
 import update_prduct_in_stock
-import search_product_in_stock
+import all_stocks_in_inventory
 
 
 def my_stock():
@@ -22,7 +22,7 @@ def my_stock():
         print("1. Add new product in stock")
         print("2. Update Inventory")
         print("3. Check stock Report")
-        print("4. Search product in stock ")
+        print("4. My_inventory")
         print("0. Exit")   
 
 
@@ -35,9 +35,10 @@ def my_stock():
                 update_prduct_in_stock.update_product(JSON_data, exiting_program)
             elif choice==3:
                 check_stock_report.all_product_information(JSON_data, exiting_program)
-                
             elif choice==4:
-                search_product_in_stock.single_product_information(JSON_data, exiting_program)
+                all_stocks_in_inventory.my_inventory(JSON_data, exiting_program)
+            
+            
             elif choice==0:
                 print("\nExiting",end="")
                 for i in range(50):
