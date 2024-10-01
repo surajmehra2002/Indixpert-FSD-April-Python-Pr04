@@ -1,1 +1,1 @@
-from .manage_shop import my_stock
+from .authentication import dashboard

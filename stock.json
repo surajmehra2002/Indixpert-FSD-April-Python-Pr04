@@ -1,7 +1,0 @@
-[ 
-{"product_id":"PD01",
- "product":{"name":"watch","price":1200,"quantity":300,"added_on":"2024-09-30 14:12:47"}}, 
-
-{"product_id":"PD02",
- "product":{"name":"milk","price":34,"quantity":1200,"added_on":"2024-09-30 14:16:23"}}
- ]

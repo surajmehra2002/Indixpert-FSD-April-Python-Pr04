@@ -4,7 +4,6 @@
 
 import time,sys
 sys.path.append(r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\Inventory_management_system")  #because line no 4 to 8 module importing
-JSON_data = r"stock.json"
 
 import adding_product_in_stock
 import check_stock_report
@@ -12,8 +11,9 @@ import update_prduct_in_stock
 import all_stocks_in_inventory
 
 
-def my_stock():
-
+def my_stock(user_name, user_id):
+    user_file = f"{user_name}'s_stock_{user_id}.json"
+    JSON_data = r"inventory_data\ " + user_file
     while True:
         print( "\n\n****************************************************" )
         print(".............Inventory Management System.............")
@@ -59,3 +59,4 @@ def exiting_program():
         time.sleep(0.1)
         print(".",end="")
     print("\n")
+
