@@ -1,0 +1,51 @@
+[
+    {
+        "user_id": "SNa1329",
+        "first_name": "manish",
+        "last_name": "singh",
+        "email": "mmm@gmail.com",
+        "password": "999999999"
+    },
+    {
+        "user_id": "SN9481e",
+        "first_name": "suraj",
+        "last_name": "mehra",
+        "email": "suri@gmail.com",
+        "password": "surajsingh"
+    },
+    {
+        "user_id": "SN75cd8",
+        "first_name": "neeraj",
+        "last_name": "singh",
+        "email": "neeraj@gmail.com",
+        "password": "neerajsingh"
+    },
+    {
+        "user_id": "SN9e571",
+        "first_name": "manoj",
+        "last_name": "singh",
+        "email": "monu@gmail.com",
+        "password": "manojsingh"
+    },
+    {
+        "user_id": "SN833a3",
+        "first_name": "nisha",
+        "last_name": "mehta",
+        "email": "nisha@gmail.com",
+        "password": "nishamehta"
+    },
+    {
+        "user_id": "SN2e9df",
+        "first_name": "yogesh",
+        "last_name": "mehra",
+        "email": "yoge@gmail.com",
+        "password": "surajsingh"
+    },
+    {
+        "user_id": "SN2415a",
+        "first_name": "lsd",
+        "last_name": "sldj",
+        "email": "surajmehra@gmail.com",
+        "password": "singhsuraj"
+    }
+]

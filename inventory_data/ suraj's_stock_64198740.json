@@ -1,7 +1,0 @@
-[ 
-{"product_id":"PD01",
- "product":{"name":"iphone","price":12212,"quantity":12,"added_on":"2024-10-01 10:29:24"}}, 
-
-{"product_id":"PD02",
- "product":{"name":"earphone","price":1200,"quantity":45,"added_on":"2024-10-01 10:29:41"}}
- ]

@@ -30,7 +30,6 @@ def add_product_in_stock(JSON_data, exiting_program):
 
             list_data.append(new_product)
 
-            list_data = sorted(list_data, key=lambda x: x["product_id"])
 
             with open(JSON_data, "w") as file:
                 json_data = json.dumps(list_data, indent=None, separators=(",", ":"))  
@@ -58,16 +57,17 @@ def add_product_in_stock(JSON_data, exiting_program):
                 except json.JSONDecodeError:
                     list_data = []
         else:
-            print("You don't have database file, we are creating new json file (stock.json)")
-            print("Creating",end="")
+            print("Oh! You are new user")
+            print("Creating database file",end="")
             for i in range (5):
                 time.sleep(.1)
                 print(".",end="")
             print("\n")
 
             list_data = []
-        len_list_data = len(list_data)
-        systm_genarate_id = len_list_data+1
+
+        count_data_file= 1      
+        systm_genarate_id = count_data_file+1
         product_id = "PD0"+ str(systm_genarate_id)
 
 

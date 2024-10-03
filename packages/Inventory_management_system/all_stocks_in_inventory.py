@@ -25,3 +25,4 @@ def my_inventory(JSON_data,exiting_program):
                 print(product)
             
             
+            
