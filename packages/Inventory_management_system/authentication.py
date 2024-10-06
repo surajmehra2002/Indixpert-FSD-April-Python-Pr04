@@ -1,6 +1,8 @@
 import json,sys,os, time
 import uuid
-import re  # Import the re module for regular expressions
+from admin.admin_dashboard import admin_login
+
+import re 
 # sys.path.append(r"S:\python_project(inventory_management_system)\Indixpert-FSD-April-Python-Pr04\Inventory_management_system")  #because line no 4 to 8 module importing
 sys.path.append(os.path.dirname(__file__))
 
@@ -176,8 +178,7 @@ def dashboard():
                                                        
 
             elif choice == 2:
-                print("working")
-                # admin_login()
+                admin_login()
 
             elif choice == 0:
                 break

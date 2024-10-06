@@ -10,7 +10,6 @@ import update_prduct_in_stock
 import all_stocks_in_inventory
 
 
-
 def my_stock(user_name, user_id):
     user_file = f"{user_name}'s_stock_{user_id}.json"
     JSON_data = r"data_base/inventory_data/" + user_file
@@ -72,4 +71,5 @@ def exiting_program():
         time.sleep(0.1)
         print(".",end="")
     print("\n")
+
 

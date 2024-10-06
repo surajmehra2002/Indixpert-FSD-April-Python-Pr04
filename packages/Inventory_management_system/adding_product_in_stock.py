@@ -1,11 +1,11 @@
-# This file will not run from this location because it is a module and all files are managed from manage_shop.py
-
 import json
-import os, time
+import os
+import time
 from datetime import datetime
 
 
 def add_product_in_stock(JSON_data, exiting_program):
+
     class Inventory:
 
         def add_product(self, id, name, price, quantity):
@@ -15,7 +15,7 @@ def add_product_in_stock(JSON_data, exiting_program):
                 "name": name,
                 "price": price,
                 "quantity": quantity,
-                "added_on": current_datetime  
+                "added_on": current_datetime
             }
             new_product = {"product_id": id, "product": dict_format_item}
 
@@ -30,62 +30,77 @@ def add_product_in_stock(JSON_data, exiting_program):
 
             list_data.append(new_product)
 
-
             with open(JSON_data, "w") as file:
-                json_data = json.dumps(list_data, indent=None, separators=(",", ":"))  
-                compact_json_data = json_data.replace("},", "}, \n")  
-                compact_json_data1 = compact_json_data.replace('[', '[ \n')  
-                compact_json_data2 = compact_json_data1.replace(']', '\n ]') 
-                compact_json_data3 = compact_json_data2.replace(',"product":', ',\n "product":')  
-                compact_json_data4 = compact_json_data3.replace('}}, ', '}}, \n') 
+                json_data = json.dumps(list_data, indent=None, separators=(",", ":"))
+                compact_json_data = json_data.replace("},", "}, \n")
+                compact_json_data1 = compact_json_data.replace('[', '[ \n')
+                compact_json_data2 = compact_json_data1.replace(']', '\n ]')
+                compact_json_data3 = compact_json_data2.replace(',"product":', ',\n "product":')
+                compact_json_data4 = compact_json_data3.replace('}}, ', '}}, \n')
                 file.write(compact_json_data4)
-            print("\nAdding",end="")
+            print("\nAdding", end="")
             for i in range(5):
                 time.sleep(.2)
-                print(".",end="")
+                print(".", end="")
             print("\nProduct added successfully to your stock.")
-            exiting_program()
 
     stock = Inventory()
 
-    while True:
-
-        if os.path.exists(JSON_data):
-            with open(JSON_data, "r") as file:
+    def count_user():
+        count_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data_base', 'count_user.json'))
+        if os.path.exists(count_file):
+            with open(count_file, "r") as file:
                 try:
-                    list_data = json.loads(file.read())
+                    data = json.load(file)
+                    count = data["total_user"]
                 except json.JSONDecodeError:
-                    list_data = []
+                    count = 0
         else:
-            print("Oh! You are new user")
-            print("Creating database file",end="")
-            for i in range (5):
-                time.sleep(.1)
-                print(".",end="")
-            print("\n")
+            count = 0
+            data = {"total_user": count + 1}
+            os.makedirs(os.path.dirname(count_file), exist_ok=True)
+            with open(count_file, "w") as file:
+                json.dump(data, file, indent=4)
 
-            list_data = []
+        return count
 
-        count_data_file= 1      
-        systm_genarate_id = count_data_file+1
-        product_id = "PD0"+ str(systm_genarate_id)
+    def update_count_file(count):
+        count_file = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data_base', 'count_user.json'))
+        with open(count_file, "w") as file:
+            json.dump({"total_user": count}, file, indent=4)
 
+    if os.path.exists(JSON_data):
+        with open(JSON_data, "r") as file:
+            try:
+                list_data = json.loads(file.read())
+            except json.JSONDecodeError:
+                list_data = []
+    else:
+        print("Oh! You are a new user")
+        print("Creating database file", end="")
+        for i in range(5):
+            time.sleep(.1)
+            print(".", end="")
+        print("\n")
+        list_data = []
 
+    system_generate_id = count_user() + 1
+    product_id = "PD0" + str(system_generate_id)
 
-        
-        while True:
-            product_name = input("Enter Product Name: ").strip()
-            product_name_exists = any(product["product"]["name"].lower() == product_name.lower() for product in list_data)
+    update_count_file(system_generate_id)
 
-            if product_name_exists:
-                print(f"Error: Product name '{product_name}' already exists. Please enter a different product name.")
-            else:
-                break 
-        stock.add_product(
-            product_id,
-            product_name,
-            int(input("Enter per item price: ")),
-            int(input("Enter quantity: "))
-        )
-        break 
+    while True:
+        product_name = input("Enter Product Name: ").strip()
+        product_name_exists = any(product["product"]["name"].lower() == product_name.lower() for product in list_data)
 
+        if product_name_exists:
+            print(f"Error: Product name '{product_name}' already exists. Please enter a different product name.")
+        else:
+            break
+
+    stock.add_product(
+        product_id,
+        product_name,
+        int(input("Enter per item price: ")),
+        int(input("Enter quantity: "))
+    )
