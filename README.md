@@ -21,3 +21,23 @@ Welcome to the **Inventory Management System**! This project provides a simple y
 1. Clone the repository to your local machine:
    ```bash
    git clone https://github.com/yourusername/inventory-management-system.git
+
+2. Navigate to the project directory:
+   ```bash
+   cd inventory-management-system
+
+3. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+
+## Usage
+1. Run the application:
+   ```bash
+   python your_main_file.py
+
+## Admin Login
+1. Admin authentication:
+   username: suraj@gmail.com
+   password: suraj123
+
+
